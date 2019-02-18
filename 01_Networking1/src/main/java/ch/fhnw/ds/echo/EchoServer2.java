@@ -41,6 +41,7 @@ public class EchoServer2 {
 
                 String input = in.readLine();
                 while (input != null && !"".equals(input)) {
+                    System.out.println(sock + ": " + input);
                     out.println(input);
                     input = in.readLine();
                 }

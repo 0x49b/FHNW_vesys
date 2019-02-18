@@ -17,7 +17,7 @@ public class EchoServer3 {
     private static int SIZE_THREAD_POOL = 4;
 
     public static void main(String args[]) throws IOException {
-        int port = 1234;
+        int port = 7777;
         ServerSocket server = new ServerSocket(port);
         System.out.println("Startet Echo Server on port " + port);
         for (int i = 0; i < SIZE_THREAD_POOL; i++) {

@@ -15,7 +15,7 @@ import java.net.Socket;
 public class EchoServer1 {
 
     public static void main(String args[]) throws IOException {
-        try (ServerSocket server = new ServerSocket(1234)) {
+        try (ServerSocket server = new ServerSocket(1234, 2)) {
             System.out.println("Startet Echo Server on port " + server.getLocalPort());
             while (true) {
                 try (Socket s = server.accept()) {
