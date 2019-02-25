@@ -1,0 +1,34 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+dependencies {
+    compile 'junit:junit:4.12'
+}
+
+task wrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn wrapper
+    from projectDir
+    
+    include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+	
+	include 'src/main/java/ch/fhnw/ds/close/*.java'
+	include 'src/main/java/ch/fhnw/ds/compress/*.java'
+	include 'src/main/java/ch/fhnw/ds/echo/*.java'
+	include 'src/main/java/ch/fhnw/ds/networking/io/*.java'
+	include 'src/main/java/ch/fhnw/ds/networking/tcp/*.java'
+	include 'src/main/java/ch/fhnw/ds/networking/udp/*.java'
+	exclude 'src/main/java/ch/fhnw/ds/networking/udp/SimpleClient2.java'
+}
