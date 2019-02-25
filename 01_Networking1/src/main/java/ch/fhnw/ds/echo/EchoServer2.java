@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2019 Fachhochschule Nordwestschweiz (FHNW)
- * All Rights Reserved. 
+ * All Rights Reserved.
  */
 
 package ch.fhnw.ds.echo;
@@ -14,39 +14,42 @@ import java.net.Socket;
 
 public class EchoServer2 {
 
-	public static void main(String args[]) throws IOException {
-		int port = 1234;
-		try (ServerSocket server = new ServerSocket(port)) {
-			System.out.println("Startet Echo Server on port " + port);
-			while (true) {
-				Socket s = server.accept();
-				Thread t = new Thread(new EchoHandler(s));
-				t.start();
-			}
-		}
-	}
+    public static void main(String args[]) throws IOException {
+        int port = 1234;
+        try (ServerSocket server = new ServerSocket(port)) {
+            System.out.println("Startet Echo Server on port " + port);
+            while (true) {
+                Socket s = server.accept();
+                Thread t = new Thread(new EchoHandler(s));
+                t.start();
+            }
+        }
+    }
 
-	private static class EchoHandler implements Runnable {
-		private final Socket sock;
+    private static class EchoHandler implements Runnable {
+        private final Socket sock;
 
-		private EchoHandler(Socket sock) { this.sock = sock; }
+        private EchoHandler(Socket sock) {
+            this.sock = sock;
+        }
 
-		public void run() {
-			System.out.println("connection from " + sock);
-			try (Socket s = sock; 
-				BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-				PrintWriter out = new PrintWriter(s.getOutputStream(), true)) {
+        public void run() {
+            System.out.println("connection from " + sock);
+            try (Socket s = sock;
+                 BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                 PrintWriter out = new PrintWriter(s.getOutputStream(), true)) {
 
-				String input = in.readLine();
-				while (input != null && !"".equals(input)) {
-					out.println(input);
-					input = in.readLine();
-				}
-				System.out.println("done serving " + s);
-			} catch (IOException e) {
-				System.err.println(e);
-				throw new RuntimeException(e);
-			}
-		}
-	}
+                String input = in.readLine();
+                while (input != null && !"".equals(input)) {
+                    System.out.println(sock + ": " + input);
+                    out.println(input);
+                    input = in.readLine();
+                }
+                System.out.println("done serving " + s);
+            } catch (IOException e) {
+                System.err.println(e);
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
