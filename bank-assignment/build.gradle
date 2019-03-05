@@ -1,11 +1,8 @@
 apply plugin: 'java'
-apply plugin: 'application'
 
 repositories {
     jcenter()
 }
-
-mainClassName = 'bank.gui.Client'
 
 sourceCompatibility = 11
 targetCompatibility = 11
@@ -38,4 +35,27 @@ apply plugin: 'idea'
 
 idea.module.outputDir file("out/production/classes")
 
+
+apply plugin: 'eclipse'
+
+eclipse.classpath.file {
+    whenMerged {
+        entries.findAll { it.kind == 'lib' }.each { it.entryAttributes['module'] = 'true' }
+    }
+}
+
+compileJava {
+      options.compilerArgs = [
+             '--module-path', classpath.asPath
+      ]
+}
+
+task runBank(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'bank.gui.ClientFX'
+    jvmArgs = [
+        '--module-path', classpath.asPath,
+        '--add-modules', 'javafx.controls'
+    ]
+}
 
