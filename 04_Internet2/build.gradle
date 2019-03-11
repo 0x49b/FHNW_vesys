@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+    compile "javax.servlet:javax.servlet-api:4.0.0"
+    compile "org.apache.tomcat.embed:tomcat-embed-core:9.0.16"
+    compile "org.apache.tomcat.embed:tomcat-embed-jasper:9.0.16"
+    
+    providedCompile "com.github.briandilley.jsonrpc4j:jsonrpc4j:1.5.3"
+    providedCompile "com.fasterxml.jackson.core:jackson-databind:2.9.8"
+    providedCompile "javax.portlet:portlet-api:3.0.1"
+}
+
+war {
+    archiveName = 'ds.war'
+}
+
+
+//task wrapper(type: Wrapper)
+task zip(type: Zip) {
+    dependsOn wrapper
+    from projectDir
+
+    include 'build.gradle'
+    include 'gradle/**'
+    include 'gradlew'
+    include 'gradlew.bat'
+
+    include 'src/main/webapp/**'
+    include 'src/main/java/tomcat/**'
+    include 'src/main/java/ch/fhnw/ds/servlet/currency/**'
+    include 'src/main/java/ch/fhnw/ds/servlet/echo/**'
+    include 'src/main/java/ch/fhnw/ds/jsonrpc/**'
+}
