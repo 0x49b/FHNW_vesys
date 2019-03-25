@@ -1,0 +1,55 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+def currentOS = org.gradle.internal.os.OperatingSystem.current()
+def platform
+if (currentOS.isWindows()) {
+    platform = 'win'
+} else if (currentOS.isLinux()) {
+    platform = 'linux'
+} else if (currentOS.isMacOsX()) {
+    platform = 'mac'
+}
+
+dependencies {
+    compile "org.openjfx:javafx-base:11:${platform}"
+    compile "org.openjfx:javafx-graphics:11:${platform}"
+    compile "org.openjfx:javafx-controls:11:${platform}"
+    compile "org.openjfx:javafx-swing:11:${platform}"
+}
+
+dependencies {
+    compile 'junit:junit:4.12'
+//	compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.34.0'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.7'
+}
+
+
+task wrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn wrapper
+    from projectDir
+    
+    include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+	
+	include 'src/main/java/ch/fhnw/ds/internet/*.java'
+	include 'src/main/java/ch/fhnw/ds/internet/currency/CurrencyConverterNet.java'
+	include 'src/main/java/ch/fhnw/ds/internet/currency/CurrencyConverterNetSwing.java'
+	include 'src/main/java/ch/fhnw/ds/internet/client/apache/*.java'
+	include 'src/main/java/ch/fhnw/ds/internet/client/http/*.java'
+	include 'src/main/java/ch/fhnw/ds/internet/server/**'
+
+	include 'src/main/resources/web/**'
+}

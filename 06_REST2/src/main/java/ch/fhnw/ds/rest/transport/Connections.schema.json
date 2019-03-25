@@ -1,0 +1,365 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Connections",
+  "properties" : {
+    "connections" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Connection",
+        "properties" : {
+          "from" : {
+            "type" : "object",
+            "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:From",
+            "properties" : {
+              "station" : {
+                "type" : "object",
+                "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Station",
+                "properties" : {
+                  "id" : {
+                    "type" : "string"
+                  },
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "score" : {
+                    "type" : "any"
+                  },
+                  "coordinate" : {
+                    "type" : "object",
+                    "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Coordinate",
+                    "properties" : {
+                      "type" : {
+                        "type" : "string"
+                      },
+                      "x" : {
+                        "type" : "number"
+                      },
+                      "y" : {
+                        "type" : "number"
+                      }
+                    }
+                  },
+                  "distance" : {
+                    "type" : "integer"
+                  }
+                }
+              },
+              "arrival" : {
+                "type" : "any"
+              },
+              "arrivalTimestamp" : {
+                "type" : "any"
+              },
+              "departure" : {
+                "type" : "string"
+              },
+              "departureTimestamp" : {
+                "type" : "integer"
+              },
+              "delay" : {
+                "type" : "any"
+              },
+              "platform" : {
+                "type" : "string"
+              },
+              "prognosis" : {
+                "type" : "object",
+                "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Prognosis",
+                "properties" : {
+                  "platform" : {
+                    "type" : "any"
+                  },
+                  "arrival" : {
+                    "type" : "any"
+                  },
+                  "departure" : {
+                    "type" : "any"
+                  },
+                  "capacity1st" : {
+                    "type" : "any"
+                  },
+                  "capacity2nd" : {
+                    "type" : "any"
+                  }
+                }
+              },
+              "realtimeAvailability" : {
+                "type" : "any"
+              },
+              "location" : {
+                "type" : "object",
+                "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Location",
+                "properties" : {
+                  "id" : {
+                    "type" : "string"
+                  },
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "score" : {
+                    "type" : "any"
+                  },
+                  "coordinate" : {
+                    "type" : "object",
+                    "$ref" : "#/properties/connections/items/properties/from/properties/station/properties/coordinate"
+                  },
+                  "distance" : {
+                    "type" : "any"
+                  }
+                }
+              }
+            }
+          },
+          "to" : {
+            "type" : "object",
+            "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:To",
+            "properties" : {
+              "station" : {
+                "type" : "object",
+                "$ref" : "#/properties/connections/items/properties/from/properties/station"
+              },
+              "arrival" : {
+                "type" : "string"
+              },
+              "arrivalTimestamp" : {
+                "type" : "integer"
+              },
+              "departure" : {
+                "type" : "any"
+              },
+              "departureTimestamp" : {
+                "type" : "any"
+              },
+              "delay" : {
+                "type" : "any"
+              },
+              "platform" : {
+                "type" : "string"
+              },
+              "prognosis" : {
+                "type" : "object",
+                "$ref" : "#/properties/connections/items/properties/from/properties/prognosis"
+              },
+              "realtimeAvailability" : {
+                "type" : "any"
+              },
+              "location" : {
+                "type" : "object",
+                "$ref" : "#/properties/connections/items/properties/from/properties/location"
+              }
+            }
+          },
+          "duration" : {
+            "type" : "string"
+          },
+          "transfers" : {
+            "type" : "integer"
+          },
+          "service" : {
+            "type" : "any"
+          },
+          "products" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "capacity1st" : {
+            "type" : "any"
+          },
+          "capacity2nd" : {
+            "type" : "any"
+          },
+          "sections" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Section",
+              "properties" : {
+                "journey" : {
+                  "type" : "object",
+                  "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Journey",
+                  "properties" : {
+                    "name" : {
+                      "type" : "string"
+                    },
+                    "category" : {
+                      "type" : "string"
+                    },
+                    "subcategory" : {
+                      "type" : "any"
+                    },
+                    "categoryCode" : {
+                      "type" : "any"
+                    },
+                    "number" : {
+                      "type" : "string"
+                    },
+                    "operator" : {
+                      "type" : "string"
+                    },
+                    "to" : {
+                      "type" : "string"
+                    },
+                    "passList" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:PassList",
+                        "properties" : {
+                          "station" : {
+                            "type" : "object",
+                            "$ref" : "#/properties/connections/items/properties/from/properties/station"
+                          },
+                          "arrival" : {
+                            "type" : "string"
+                          },
+                          "arrivalTimestamp" : {
+                            "type" : "integer"
+                          },
+                          "departure" : {
+                            "type" : "any"
+                          },
+                          "departureTimestamp" : {
+                            "type" : "any"
+                          },
+                          "delay" : {
+                            "type" : "any"
+                          },
+                          "platform" : {
+                            "type" : "string"
+                          },
+                          "prognosis" : {
+                            "type" : "object",
+                            "$ref" : "#/properties/connections/items/properties/from/properties/prognosis"
+                          },
+                          "realtimeAvailability" : {
+                            "type" : "any"
+                          },
+                          "location" : {
+                            "type" : "object",
+                            "$ref" : "#/properties/connections/items/properties/from/properties/location"
+                          }
+                        }
+                      }
+                    },
+                    "capacity1st" : {
+                      "type" : "any"
+                    },
+                    "capacity2nd" : {
+                      "type" : "any"
+                    }
+                  }
+                },
+                "walk" : {
+                  "type" : "any"
+                },
+                "departure" : {
+                  "type" : "object",
+                  "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Departure",
+                  "properties" : {
+                    "station" : {
+                      "type" : "object",
+                      "$ref" : "#/properties/connections/items/properties/from/properties/station"
+                    },
+                    "arrival" : {
+                      "type" : "any"
+                    },
+                    "arrivalTimestamp" : {
+                      "type" : "any"
+                    },
+                    "departure" : {
+                      "type" : "string"
+                    },
+                    "departureTimestamp" : {
+                      "type" : "integer"
+                    },
+                    "delay" : {
+                      "type" : "any"
+                    },
+                    "platform" : {
+                      "type" : "string"
+                    },
+                    "prognosis" : {
+                      "type" : "object",
+                      "$ref" : "#/properties/connections/items/properties/from/properties/prognosis"
+                    },
+                    "realtimeAvailability" : {
+                      "type" : "any"
+                    },
+                    "location" : {
+                      "type" : "object",
+                      "$ref" : "#/properties/connections/items/properties/from/properties/location"
+                    }
+                  }
+                },
+                "arrival" : {
+                  "type" : "object",
+                  "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Arrival",
+                  "properties" : {
+                    "station" : {
+                      "type" : "object",
+                      "$ref" : "#/properties/connections/items/properties/from/properties/station"
+                    },
+                    "arrival" : {
+                      "type" : "string"
+                    },
+                    "arrivalTimestamp" : {
+                      "type" : "integer"
+                    },
+                    "departure" : {
+                      "type" : "any"
+                    },
+                    "departureTimestamp" : {
+                      "type" : "any"
+                    },
+                    "delay" : {
+                      "type" : "any"
+                    },
+                    "platform" : {
+                      "type" : "string"
+                    },
+                    "prognosis" : {
+                      "type" : "object",
+                      "$ref" : "#/properties/connections/items/properties/from/properties/prognosis"
+                    },
+                    "realtimeAvailability" : {
+                      "type" : "any"
+                    },
+                    "location" : {
+                      "type" : "object",
+                      "$ref" : "#/properties/connections/items/properties/from/properties/location"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "from" : {
+      "type" : "object",
+      "$ref" : "#/properties/connections/items/properties/from"
+    },
+    "to" : {
+      "type" : "object",
+      "$ref" : "#/properties/connections/items/properties/to"
+    },
+    "stations" : {
+      "type" : "object",
+      "id" : "urn:jsonschema:ch:fhnw:ds:rest:transport:types:Stations",
+      "properties" : {
+        "stations" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "$ref" : "#/properties/connections/items/properties/from/properties/station"
+          }
+        }
+      }
+    }
+  }
+}
+

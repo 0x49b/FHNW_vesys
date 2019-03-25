@@ -1,0 +1,45 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+	compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+	compile 'javax.xml.bind:jaxb-api:2.3.1'
+	compile 'com.sun.xml.bind:jaxb-impl:2.3.1'
+
+	compile 'com.thoughtworks.xstream:xstream:1.4.11.1'
+
+	// Jersey mapping for JDK Http Contaier 
+	compile 'org.glassfish.jersey.containers:jersey-container-jdk-http:2.28'
+	
+	// HK2 InjectionManager implementation
+	compile 'org.glassfish.jersey.inject:jersey-hk2:2.28'
+	
+	// MessageBodyWriter for media type application/json
+	compile 'org.glassfish.jersey.media:jersey-media-json-binding:2.28'
+	
+	// @JsonIgonre etc annotations
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
+}
+
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+	from projectDir
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include 'src/main/java/ch/fhnw/ds/rest/msg/**'
+}
+

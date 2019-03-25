@@ -1,0 +1,65 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+	// JAXB
+	compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+	compile 'javax.xml.bind:jaxb-api:2.3.1'
+	compile 'com.sun.xml.bind:jaxb-impl:2.3.2'
+
+	// XStream
+	compile 'com.thoughtworks.xstream:xstream:1.4.11.1'
+	
+    // Java Spark
+    compile 'com.sparkjava:spark-core:2.8.0'
+    compile 'org.slf4j:slf4j-simple:1.7.26'
+
+	// Javalin
+	compile 'io.javalin:javalin:2.7.0'
+
+	// GSon
+	compile 'com.google.code.gson:gson:2.8.5'
+	
+	// Jersey mapping for JDK Http Contaier 
+	compile 'org.glassfish.jersey.containers:jersey-container-jdk-http:2.28'
+	
+	// HK2 InjectionManager implementation
+	compile 'org.glassfish.jersey.inject:jersey-hk2:2.28'
+	
+	// Provides MessageBodyWriter for media type application/json
+	compile 'org.glassfish.jersey.media:jersey-media-json-binding:2.28'
+	
+	// JSON Schema
+	compile 'com.fasterxml.jackson.module:jackson-module-jsonSchema:2.9.8'
+	compile 'org.jsonschema2pojo:jsonschema2pojo-core:1.0.0'
+	
+	// RestEasy
+	compile 'org.jboss.resteasy:resteasy-client:3.6.3.Final'
+	compile 'org.jboss.resteasy:resteasy-jackson2-provider:3.6.3.Final'
+	compile 'org.jboss.resteasy:resteasy-jaxb-provider:3.6.3.Final'
+}
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+    from projectDir
+    
+    include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+    include 'src/main/java/ch/fhnw/ds/rest/msg/**'
+    include 'src/main/java/ch/fhnw/ds/rest/transport/*.java'
+    include 'src/main/java/ch/fhnw/ds/rest/transport/*.json'
+    include 'src/main/java/ch/fhnw/ds/spark/**'
+    include 'src/main/java/ch/fhnw/ds/javalin/**'
+}
