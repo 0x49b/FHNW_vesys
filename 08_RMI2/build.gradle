@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+repositories {
+	jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+}
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+	from projectDir
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include 'src/main/java/ch/fhnw/ds/rmi/calculator/*.java'
+	include 'src/main/java/ch/fhnw/ds/rmi/calculator/encoded/*.java'
+	include 'src/main/java/ch/fhnw/ds/rmi/export/*.java'
+	include 'src/main/java/ch/fhnw/ds/rmi/calculator/file/*.java'
+
+	include 'src/main/java/ch/fhnw/ds/internet/server/web/*.java'
+}

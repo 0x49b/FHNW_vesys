@@ -1,0 +1,35 @@
+apply plugin: 'java'
+
+repositories {
+	jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+	compile 'org.glassfish.tyrus:tyrus-client:1.15'
+	compile 'org.glassfish.tyrus:tyrus-container-grizzly-server:1.15'
+
+	// Spark Java
+	compile 'com.sparkjava:spark-core:2.9.0'
+}
+
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+	from projectDir
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include 'src/**'
+
+	exclude { details -> details.file.name.endsWith('.java') &&
+	                     details.file.text.contains('EXCLUDE') }
+}
